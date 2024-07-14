@@ -5,7 +5,7 @@ CC		= gcc
 FLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -rf
 SRCS	= mandatory/check_arg.c mandatory/argc_to_list.c \
-				mandatory/main.c mandatory/make_list.c 
+		mandatory/main.c mandatory/make_list.c mandatory/push_utils.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)

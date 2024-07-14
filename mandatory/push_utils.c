@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 12:56:28 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/14 14:35:37 by mranaivo         ###   ########.fr       */
+/*   Created: 2024/07/14 16:57:49 by mranaivo          #+#    #+#             */
+/*   Updated: 2024/07/14 17:02:40 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
-
-int	main(int agrc, char *argv[])
+int	cmp(int nb1, int nb2)
 {
-	char	**ok = argc_split(argv[1]);
-	if (!ok)
+	if (nb1 < nb2)
 	    return (1);
-	ft_printf("0 double");
+	else if (nb1 > nb2)
+		return (-1);
 	return (0);
 }

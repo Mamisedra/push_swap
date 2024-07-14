@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:57:47 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/11 16:43:58 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/14 17:26:04 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,14 @@ int		lst_size(t_stack *stack);
 
 /*=============ARGC_TO_LIST-C==============*/
 
-t_list	*argc_to_list(int argc, char **argv);
+t_stack	*argc_to_list(int argc, char **argv);
 void	lst_clear(t_stack **stack);
 void	lst_delone(t_stack **stack, t_stack *to_delete);
+void	lst_add_split(char *argv, t_stack **stack);
+int		lst_double(t_stack *stack);
+
+/*=============PUSH_UTILS-C================*/
+
+int	cmp(int nb1, int nb2);
 
 #endif
