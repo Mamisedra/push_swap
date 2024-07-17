@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mranaivo <mranaivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:57:47 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/14 17:26:04 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:29:14 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "ft_libft/libft.h"
 # include "ft_printf/ft_printf.h"
+# define ERR_MSG "\033[1;31m ==>ERROR:"
 
 typedef struct s_stack
 {

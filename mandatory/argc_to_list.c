@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argc_to_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mranaivo <mranaivo@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:41:13 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/14 17:26:54 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:07:18 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	lst_clear(t_stack **stack)
 		tete = temp;
 	}
 	*stack = NULL;
+	free(tete);
+	free(temp);
 }
 
 void	lst_delone(t_stack **stack, t_stack *to_delete)
@@ -76,7 +78,7 @@ t_stack	*argc_to_list(int argc, char **argv)
 	if (!stack_a)
 		return (NULL);
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
 		lst_add_split(argv[i], &stack_a);
 		i++;
