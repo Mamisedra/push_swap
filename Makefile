@@ -4,8 +4,8 @@ PRINTF_DIR	= ./ft_printf
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -rf
-SRCS	= mandatory/check_arg.c mandatory/argc_to_list.c \
-		mandatory/main.c mandatory/make_list.c mandatory/push_utils.c
+SRCS	= mandatory/argc_to_list.c mandatory/push.c mandatory/push_swap.c\
+	mandatory/main.c mandatory/make_list.c mandatory/push_list.c mandatory/swap.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)

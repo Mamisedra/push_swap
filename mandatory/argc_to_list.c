@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argc_to_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mranaivo <mranaivo@student.42antananari    +#+  +:+       +#+        */
+/*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:41:13 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/16 23:07:18 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:41:12 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,41 +49,17 @@ void	lst_delone(t_stack **stack, t_stack *to_delete)
 	free(to_delete);
 }
 
-void	lst_add_split(char *argv, t_stack **stack)
+void	ft_free_str(char **str)
 {
-	char	**after_split;
-	int		i;
+	int    i;
 
-	after_split = argc_split(argv);
-	if (!after_split)
-	{
-		return ;
-		exit (EXIT_FAILURE);
-	}
 	i = 0;
-	while (after_split[i] != NULL)
+	while (str[i] != NULL)
 	{
-		lst_add_back(stack, init_new_lst(ft_atoi(after_split[i])));
-        i++;
+		free(str[i]);
+		i ++;
 	}
-	ft_free_str(after_split);
-}
-
-t_stack	*argc_to_list(int argc, char **argv)
-{	
-	t_stack	*stack_a;
-	int		i;
-
-	stack_a = init_lst();
-	if (!stack_a)
-		return (NULL);
-	i = 1;
-	while (i < argc)
-	{
-		lst_add_split(argv[i], &stack_a);
-		i++;
-	}
-	return (stack_a);
+	free(str);
 }
 
 int	lst_double(t_stack *stack)
@@ -99,10 +75,22 @@ int	lst_double(t_stack *stack)
 		while (next)
 		{
 			if (cmp(next->data, stack->data) == 0)
+			{
+				ft_printf("%s %s", ERR_MSG, "Argument contiet des doubles\n");
 				return (1);
+			}
 			next = next->next;
 		}
 		stack = stack->next;
 	}
+	return (0);
+}
+
+int	cmp(int nb1, int nb2)
+{
+	if (nb1 < nb2)
+	    return (1);
+	else if (nb1 > nb2)
+		return (-1);
 	return (0);
 }
