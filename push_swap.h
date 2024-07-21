@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 13:57:47 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/17 12:41:29 by mranaivo         ###   ########.fr       */
+/*   Created: 2024/07/18 10:15:38 by mranaivo          #+#    #+#             */
+/*   Updated: 2024/07/21 14:37:41 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,56 @@ typedef struct s_stack
 	int				data;
 	struct s_stack	*next;
 }					t_stack;
-/*==============MAKE_LIST-C================*/
 
-t_stack	*init_lst(void);
-t_stack	*init_new_lst(int index);
-void	lst_add_front(t_stack **stack, t_stack *new_stack);
-void	lst_add_back(t_stack **stack, t_stack *new_stack);
-int		lst_size(t_stack *stack);
+/*=======================MAKE_LIST==========================*/
+t_stack	*new_list(int data);
+void	lst_add_back(t_stack **stack_a, t_stack *new_stack);
+void	lst_add_front(t_stack **stack_a, t_stack *new_stack);
+void	lst_clear(t_stack **stack);
+void 	lst_delone(t_stack **stack);
 
-/*==============PUSH_LIST===================*/
+/*======================PUSH_LIST==========================*/
 
+int		push_list(int argc, char *argv[], t_stack **stack_a);
+int		lst_double(t_stack *stack_a);
+int		lst_sort(t_stack *stack_a);
+int		lst_all_error(t_stack *stack_a);
+
+/*=======================PUSH_CLEAR-c=======================*/
+
+int		argv_is_not_vide(int argc, char *argv[]);
 int		ft_check_digit(char **split);
 int		ft_check_error_split(char **split);
-int		push_list(int argc, char *argv[], t_stack *stack_a);
-int 	ft_is_trie(t_stack *stack_a);
-int		check_error_list(t_stack *stack_a);
+void	ft_free_split(char **str);
 
-/*=============ARGC_TO_LIST-C==============*/
+/*========================PUSH-c=======================*/
 
-void	lst_clear(t_stack **stack);
-void	lst_delone(t_stack **stack, t_stack *to_delete);
-void	ft_free_str(char **str);
-int		lst_double(t_stack *stack);
-int		cmp(int nb1, int nb2);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
 
-/*=================PUSH_SWAP-C==============*/
+/*========================SWAP-C=======================*/
+void	ft_ss(t_stack **stack_a, t_stack **stack_b);
+void	ft_sb(t_stack **stack_b);
+void	ft_sa(t_stack **stack_a);
+
+/*=======================REVERSE========================*/
+
+void	ft_ra(t_stack **stack_a);
+void	ft_rb(t_stack **stack_b);
+void	ft_rr(t_stack **stack_a, t_stack **stack_b);
+
+/*=====================REVERSE_REVERSE-C====================*/
+
+void	ft_rra(t_stack **stack_a);
+void	ft_rrb(t_stack **stack_b);
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
+
+/*=====================PUSH_SWAP-C====================*/
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b);
+
+/*======================ALGORITHM-C======================*/
+
+int		cmp(int a, int b);
 
 #endif

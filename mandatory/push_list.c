@@ -5,98 +5,112 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 12:56:28 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/17 15:06:11 by mranaivo         ###   ########.fr       */
+/*   Created: 2024/07/18 11:28:20 by mranaivo          #+#    #+#             */
+/*   Updated: 2024/07/21 12:30:42 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	ft_check_digit(char **split)
+static long long	ft_atoi_long(char *str)
 {
-	int	i;
-	int	j;
+	int			i;
+	long long	result;
+	int			sign;
 
+	sign = 1;
 	i = 0;
-	while (split[i] != NULL)
+	while (str[i] != '\0' && (str[i] == ' ' || str[i] >= 9 && str[i] <=13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		j = 0;
-		if (split[i][j] == '+' || split[i][j] == '-')
-			j++;
-		while (split[i][j] != '\0')
-		{
-			if (!ft_isdigit(split[i][j]))
-				return (0);
-			j++;
-		}
+		if (str[i] == '-')
+			sign = -sign;
 		i++;
 	}
-	return (1);
+	result = 0;
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]))
+			break ;
+		result = result * 10 + (str[i] - 48);
+		i++;
+	}
+	return (result * sign);
 }
 
-int	ft_check_error_split(char **split)
-{
-	if (!ft_check_digit(split))
-	{
-		ft_printf("%s %s", ERR_MSG, "Presence des autre caracteres\n");
-		return (1);
-	}
-	if (!split)
-	{
-		ft_printf("%s %s", ERR_MSG, "Character different!!\n");
-		return (1);
-	}
-	return (0);
-}
-
-int	push_list(int argc, char *argv[], t_stack *stack_a)
+int	push_list(int argc, char *argv[], t_stack **stack_a)
 {
 	char	**split;
-	int	i = 1;
-	int	j = 0;
+	int		i;
+	int		j;
 
+	i = 1;
 	while (i < argc)
 	{
 		split = ft_split(argv[i], ' ');
 		if (ft_check_error_split(split))
-		{
-			ft_free_str(split);
-			return (0);
-		}
+			return (ft_free_split(split), 0);
 		j = 0;
-		while (split[j] != NULL)
+		while (split[j]  != NULL)
 		{
-			lst_add_back(&stack_a, init_new_lst(ft_atoi(split[j])));
+			if ((ft_atoi_long(split[j]) > 2147483647) || (ft_atoi_long(split[j]) < -2147483648))
+				return (ft_printf("%s %s\n", ERR_MSG, "Argument hors int"),ft_free_split(split), 0);
+			lst_add_back(stack_a, new_list(ft_atoi(split[j])));
 			j++;
 		}
-		ft_free_str(split);
+		ft_free_split(split);
 		i++;
 	}
 	return (1);
 }
 
-int	ft_is_trie(t_stack *stack_a)
+int	lst_double(t_stack *stack_a)
 {
-	if (stack_a == NULL)
-		return (0);
-	stack_a->prev->next = NULL;
-	while (stack_a != NULL)
+	t_stack *stop;
+	t_stack	*bot;
+	t_stack	*next_stack;
+
+	stop = stack_a->prev;
+	bot = stack_a;
+	while (bot != stop)
 	{
-		if (cmp(stack_a->data, stack_a->next->data) < 0)
+		next_stack = bot->next;
+		while (next_stack != stack_a)
 		{
-			ft_printf("%s %s", ERR_MSG, "Argument deja trie !\n");
-			return (0);
+			if (next_stack->data == bot->data)
+				return (1);
+			next_stack = next_stack->next;
 		}
-		stack_a = stack_a->next;
+		bot = bot->next;
+	}
+	return (0);
+}
+
+int	lst_sort(t_stack *stack_a)
+{
+	t_stack *stop;
+	t_stack	*bot;
+
+	stop = stack_a->prev;
+	bot = stack_a;
+	while (bot != stop)
+	{
+		if (bot->data > bot->next->data)
+			return (0);
+		bot = bot->next;
 	}
 	return (1);
 }
 
-int	check_error_list(t_stack *stack_a)
+int	lst_all_error(t_stack *stack_a)
 {
 	if (lst_double(stack_a))
-		return (1);
-	if (ft_is_trie(stack_a))
-		return (1);
-	return (0);
+	{
+		ft_printf("%s %s\n", ERR_MSG, "Arguments doubles");
+		return (0);
+	}
+	if (lst_sort(stack_a))
+		return (0);
+	return (1);
 }

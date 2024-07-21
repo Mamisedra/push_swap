@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mranaivo/42-cursus/rank_02/push_swap/mandatory",
-      "program": "/home/mranaivo/42-cursus/rank_02/push_swap/mandatory/build/Debug/outDebug",
+      "cwd": "/home/mranaivo/42-cursus/push_swap",
+      "program": "/home/mranaivo/42-cursus/push_swap/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

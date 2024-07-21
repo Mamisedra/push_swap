@@ -5,79 +5,101 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 14:00:14 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/17 14:51:39 by mranaivo         ###   ########.fr       */
+/*   Created: 2024/07/18 10:16:33 by mranaivo          #+#    #+#             */
+/*   Updated: 2024/07/21 11:06:04 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../push_swap.h"
+#include "../push_swap.h"
 
-t_stack	*init_lst(void)
+t_stack	*new_list(int data)
 {
-	t_stack    *new_stack;
+	t_stack	*stack;
 
-    new_stack = (t_stack *)malloc(sizeof(t_stack));
-    if (!new_stack)
-        return (NULL);
-    new_stack->data = 0;
-    new_stack->prev = new_stack;
-    new_stack->next = new_stack;
-    return (new_stack);
-}
-
-t_stack	*init_new_lst(int index)
-{
-	t_stack    *new_stack;
-
-	new_stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!new_stack)
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
 		return (NULL);
-	new_stack->data = index;
-	new_stack->prev = NULL;
-	new_stack->next = NULL; 
-	return (new_stack);
+	stack->data = data;
+	stack->next = stack;
+	stack->prev = stack;
+	return (stack);
 }
 
-void	lst_add_front(t_stack **stack, t_stack *new_stack)
+void	lst_add_back(t_stack **stack_a, t_stack *new_stack)
 {
-	if (stack != NULL && new_stack != NULL)
+	t_stack *last;
+
+	last = NULL;
+	if (!*stack_a)
 	{
-		new_stack->next = (*stack)->next;
-		new_stack->prev = *stack;
-		(*stack)->next->prev = new_stack;
-		(*stack)->next = new_stack;
+		*stack_a = new_stack;
+		return ;
 	}
+	last = (*stack_a)->prev;
+	new_stack->next = *stack_a;
+	new_stack->prev = last;
+	last->next = new_stack;
+	(*stack_a)->prev = new_stack;
 }
 
-void	lst_add_back(t_stack **stack, t_stack *new_stack)
+void	lst_add_front(t_stack **stack_a, t_stack *new_stack)
 {
-	if(stack != NULL && new_stack != NULL)
+	t_stack *next_stack;
+
+	next_stack = NULL;
+	if (!*stack_a)
 	{
-		if (*stack == NULL)
-			*stack = new_stack;
-		else
-		{
-			new_stack->prev = (*stack)->prev;
-			new_stack->next = *stack;
-			(*stack)->prev->next = new_stack;
-			(*stack)->prev = new_stack;
-		}
+		*stack_a = new_stack;
+		return ;
 	}
+	next_stack = (*stack_a)->prev;
+	new_stack->next = *stack_a;
+	new_stack->prev = next_stack;
+	next_stack->next = new_stack;
+	(*stack_a)->prev =new_stack;
+	*stack_a = new_stack;
 }
 
-int		lst_size(t_stack *stack)
+void	lst_clear(t_stack **stack)
 {
-	t_stack    *current;
-    int        size;
+	t_stack	*temp;
+	t_stack	*begin;
 
-    if (stack == NULL)
-        return (0);
-    current = stack->next;
-    size = 0;
-    while (current != stack)
+	if (!stack || !(*stack))
+		return ;
+	begin = *stack;
+	begin->prev->next = NULL;
+	while (begin)
+	{
+		temp = begin->next;
+		free(begin);
+		begin = temp;
+	}
+	*stack = NULL;
+	free(begin);
+	free(temp);
+}
+
+void lst_delone(t_stack **stack)
+{
+    t_stack *delone;
+    t_stack *first;
+    t_stack *next;
+
+    if (*stack == NULL)
+        return;
+	delone = *stack;
+	first = (*stack)->prev;
+	next = (*stack)->next;
+    if (first == *stack && next == *stack)
+        *stack = NULL;
+    else
     {
-        current = current->next;
-        size++;
+        first->next = next;
+        next->prev = first;
+        if (*stack == delone)
+            *stack = next;
     }
-    return (size);
+    free(delone);
 }
+
