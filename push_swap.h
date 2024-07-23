@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:15:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/21 14:37:41 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:40:12 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
+typedef struct s_params
+{
+	int	content;
+	int	pos_b;
+	int	pos_a;
+	int	cost_a;
+	int	cost_b;
+	int	cost_f;
+	struct s_params	*next;
+}				t_params;
+
 /*=======================MAKE_LIST==========================*/
+
 t_stack	*new_list(int data);
 void	lst_add_back(t_stack **stack_a, t_stack *new_stack);
 void	lst_add_front(t_stack **stack_a, t_stack *new_stack);
@@ -46,6 +58,7 @@ int		argv_is_not_vide(int argc, char *argv[]);
 int		ft_check_digit(char **split);
 int		ft_check_error_split(char **split);
 void	ft_free_split(char **str);
+int		lst_size(t_stack *stack);
 
 /*========================PUSH-c=======================*/
 
@@ -53,6 +66,7 @@ void	ft_pb(t_stack **stack_a, t_stack **stack_b);
 void	ft_pa(t_stack **stack_a, t_stack **stack_b);
 
 /*========================SWAP-C=======================*/
+
 void	ft_ss(t_stack **stack_a, t_stack **stack_b);
 void	ft_sb(t_stack **stack_b);
 void	ft_sa(t_stack **stack_a);
@@ -75,6 +89,14 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b);
 
 /*======================ALGORITHM-C======================*/
 
-int		cmp(int a, int b);
+int		ft_give_min_or_max(t_stack *stack, int cnd);
+
+/*=====================LIST_PARAMS-C======================*/
+
+t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_a);
+void	ft_params_add_back(t_params **params, t_params *new_p);
+void	ft_free_params(t_params **params);
+int		ft_give_cost(t_stack *stack_a, int pos_a);
+int		ft_give_new_pos(t_stack *stack_b, int content);
 
 #endif

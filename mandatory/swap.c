@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:50:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/19 18:13:27 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:40:09 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,9 @@ void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 	}
 	ft_printf("ss\n");
 }
+
+void	ft_how_sa(t_stack **stack_a)
+{}
+
+void	ft_how_sb(t_stack **stack_b)
+{}

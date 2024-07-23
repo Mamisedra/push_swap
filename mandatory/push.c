@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:31:36 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/19 17:55:27 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:40:08 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,4 @@ void	ft_pa(t_stack **stack_a, t_stack **stack_b)
 	ft_push_utils(stack_a, first_a, last_b);
 	ft_printf("pa\n");
 }
+
