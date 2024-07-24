@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:58:39 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/23 17:40:23 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:19:34 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ int main(int argc, char *argv[])
 		return (lst_clear(&stack_a), 0);
 	if (!lst_all_error(stack_a))
 		return (lst_clear(&stack_a), 0);
-	printList(stack_a);
 	push_swap(&stack_a, &stack_b);
-	printList(stack_a);
-	printList(stack_b);
+	lst_clear(&stack_a);
+	lst_clear(&stack_b);
     return (0);
 }

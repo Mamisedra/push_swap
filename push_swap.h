@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:15:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/23 17:40:12 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:05:38 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,15 @@ void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 /*=====================PUSH_SWAP-C====================*/
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b);
+void	ft_sort_min(t_stack **stack_a, t_stack **stack_b);
+void	ft_sort_max(t_stack **stack_a, t_stack **stack_b);
 
 /*======================ALGORITHM-C======================*/
 
-int		ft_give_min_or_max(t_stack *stack, int cnd);
+int		lst_nbr_parasite(t_stack *stack_a);
+int		*lst_remove_parasit(t_stack *stack_a);
+void	push_to_stack_b(t_stack **stack_a, t_stack **stack_b);
+void	remove_action(t_stack **stack_a);
 
 /*=====================LIST_PARAMS-C======================*/
 
