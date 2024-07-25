@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:57:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/24 18:00:05 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:18:43 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ void	push_to_stack_b(t_stack **stack_a, t_stack **stack_b)
 			ft_ra(stack_a);
 	}
 	free(remove);
-	remove_action(stack_a);
+//	remove_action(stack_a);
 }

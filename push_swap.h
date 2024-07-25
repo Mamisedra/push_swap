@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:15:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/24 18:05:38 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:40:54 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_params
 {
 	int	content;
 	int	pos_b;
-	int	pos_a;
+	int	target;
 	int	cost_a;
 	int	cost_b;
 	int	cost_f;
@@ -52,7 +52,7 @@ int		lst_double(t_stack *stack_a);
 int		lst_sort(t_stack *stack_a);
 int		lst_all_error(t_stack *stack_a);
 
-/*=======================PUSH_CLEAR-c=======================*/
+/*=======================PUSH_CLEAR-c======================*/
 
 int		argv_is_not_vide(int argc, char *argv[]);
 int		ft_check_digit(char **split);
@@ -60,32 +60,35 @@ int		ft_check_error_split(char **split);
 void	ft_free_split(char **str);
 int		lst_size(t_stack *stack);
 
-/*========================PUSH-c=======================*/
+/*=========================PUSH-c==========================*/
 
 void	ft_pb(t_stack **stack_a, t_stack **stack_b);
 void	ft_pa(t_stack **stack_a, t_stack **stack_b);
 
-/*========================SWAP-C=======================*/
+/*==========================SWAP-C=========================*/
 
 void	ft_ss(t_stack **stack_a, t_stack **stack_b);
 void	ft_sb(t_stack **stack_b);
 void	ft_sa(t_stack **stack_a);
 
-/*=======================REVERSE========================*/
+/*=========================REVERSE=========================*/
 
 void	ft_ra(t_stack **stack_a);
 void	ft_rb(t_stack **stack_b);
 void	ft_rr(t_stack **stack_a, t_stack **stack_b);
 
-/*=====================REVERSE_REVERSE-C====================*/
+/*=====================REVERSE_REVERSE-C==================*/
 
 void	ft_rra(t_stack **stack_a);
 void	ft_rrb(t_stack **stack_b);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
-/*=====================PUSH_SWAP-C====================*/
+/*=====================PUSH_SWAP-C========================*/
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b);
+void	add_params_stack_b(t_stack *stack_a, t_stack*stack_b, t_params **params);
+t_params	it_s_min_cost(t_params *params);
+void	push_and_rotate(t_stack **stack_a, t_stack **stack_b, t_params min);
 void	ft_sort_min(t_stack **stack_a, t_stack **stack_b);
 void	ft_sort_max(t_stack **stack_a, t_stack **stack_b);
 
@@ -96,12 +99,14 @@ int		*lst_remove_parasit(t_stack *stack_a);
 void	push_to_stack_b(t_stack **stack_a, t_stack **stack_b);
 void	remove_action(t_stack **stack_a);
 
-/*=====================LIST_PARAMS-C======================*/
+/*====================LIST_PARAMS-C=====================*/
 
-t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_a);
+t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_b);
 void	ft_params_add_back(t_params **params, t_params *new_p);
 void	ft_free_params(t_params **params);
 int		ft_give_cost(t_stack *stack_a, int pos_a);
 int		ft_give_new_pos(t_stack *stack_b, int content);
 
+void print_params(t_params *params);
+void printList(t_stack *stack);
 #endif
