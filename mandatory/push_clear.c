@@ -6,25 +6,33 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:40:06 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/22 15:50:27 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:28:04 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	lst_size(t_stack *stack)
+int lst_size(t_stack *stack)
 {
-	int	len;
+    int len;
+    t_stack *current;
 
-	len = 0;
-	stack->prev->next = NULL;
-	while (stack != NULL)
-	{
-		len++;
-		stack = stack->next;
-	}
-	return (len);
+    if (stack == NULL)
+        return 0;
+    current = stack;
+    len = 0;
+    while (current)
+    {
+        len++;
+        current = current->next;
+        if (current == stack) // Condition pour liste circulaire
+            break;
+        if (current == NULL) // Condition pour liste simplement chaînée
+            break;
+    }
+    return len;
 }
+
 
 int	ft_check_digit(char **split)
 {

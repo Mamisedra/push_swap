@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:57:15 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/25 16:15:03 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:28:07 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,131 +15,94 @@
 
 void print_params(t_params *params)
 {
+	static int i = 1;
 	if (params == NULL)
 	{
-		printf("fail\n");
+		printf("PARAMS_NULL\n");
 		return;
 	}
     while (params != NULL)
     {
-        printf("Paramètres:\n");
-        printf(" - Content: %d\n", params->content);
-        printf(" - Pos_b: %d\n", params->pos_b);
-        printf(" - Target: %d\n", params->target);
-        printf(" - Cost_a: %d\n", params->cost_a);
-        printf(" - Cost_b: %d\n", params->cost_b);
-        printf(" - Cost_f: %d\n", params->cost_f);
+        ft_printf("Paramètres %d:\n\n", i++);
+        ft_printf(" - Content: %d\n", params->content);
+        ft_printf(" - Pos_b: %d\n", params->pos_b);
+        ft_printf(" - Target: %d\n", params->target);
+        ft_printf(" - Cost_b: %d\n", params->cost_b);
+        ft_printf(" - Cost_a: %d\n", params->cost_a);
+        ft_printf(" - Cost_f: %d\n", params->cost_f);
         params = params->next;
     }
 }
 
-void	push_swap(t_stack **stack_a, t_stack **stack_b)
+void	add_params_elem_stack(t_stack *stack_a, t_stack *stack_b, t_params **params)
 {
-	if (lst_size(*stack_a) < 6)
-		ft_sort_min(stack_a, stack_b);
-	else
+	t_stack	*tmp;
+	int		pos;
+
+	if (stack_b == NULL)
+		return ;
+	tmp = stack_b;
+	pos = 1;
+	while (1)
 	{
-		push_to_stack_b(stack_a, stack_b);
-		ft_sort_max(stack_a, stack_b);
+		ft_params_add_back(params, new_params(stack_a, tmp, pos));
+		tmp = tmp->next;
+		if (tmp == stack_b)
+			break ;
+		pos++;
 	}
 }
 
-void	add_params_stack_b(t_stack *stack_a, t_stack *stack_b, t_params **params)
+t_params	*ft_getcout_min(t_params *params)
 {
-	int	pos_b;
-	int	size;
-	int	i;
+	t_params	*ret;
 
-	pos_b = 1;
-	i = 0;
-	size = lst_size(stack_b);
-	while (i < size)
+	if (params == NULL)
+		return (NULL);
+	ret = params;
+	while (params != NULL)
 	{
-		ft_params_add_back(params, new_params(stack_a, stack_b, pos_b));
-		stack_b = stack_b->next;
-		pos_b++;
-		i++;
-	}
-}
-
-t_params	it_s_min_cost(t_params *params)
-{
-	t_params	ret;
-
-	printf("********\n");
-	// if (params == NULL)
-	// 	return (ret);
-	ret = *params;
-	while (params->next != NULL)
-	{
-		if (ret.cost_f > params->cost_f)
-			ret = *params;
+		if (ret->cost_f > params->cost_f)
+			ret  = params;
 		params = params->next;
 	}
-	ft_printf("Fonction 2\n");
 	return (ret);
 }
 
-void	push_and_rotate(t_stack **stack_a, t_stack **stack_b, t_params min)
+void	push_and_rotate(t_stack **stack_a, t_stack **stack_b, t_params *params)
 {
-	if (min.pos_b <= ((lst_size(*stack_b) + 1 ) / 2))
+	int	median_b;
+	int	size_a;
+	int	size_b;
+	int	median_a;
+
+	size_a = lst_size(*stack_a);
+	size_b = lst_size(*stack_b);
+	if (size_a % 2 != 0)
+		size_a += 1;
+	median_a = size_a / 2;
+	if (size_b % 2 != 0)
+		size_b += 1;
+	median_b = size_b / 2;
+	if (params->target <= median_a)
 	{
-		while (min.cost_b--)
+		while((params->cost_a)--)
+			ft_ra(stack_a);
+	}
+	else
+	{
+		while((params->cost_a)--)
+			ft_rra(stack_a);
+	}
+	if (params->pos_b <= median_b)
+	{
+		while((params->cost_b)--)
 			ft_rb(stack_b);
 	}
 	else
 	{
-		while (min.cost_b--)
+		while((params->cost_b)--)
 			ft_rrb(stack_b);
 	}
-	if (min.target <= ((lst_size(*stack_a) + 1 ) / 2))
-	{
-		while (min.cost_a--)
-			ft_ra(stack_b);
-	}
-	else
-	{
-		while (min.cost_a--)
-			ft_rra(stack_b);
-	}
 	ft_pa(stack_a, stack_b);
-	ft_printf("Fonction 3\n");
-}
-
-void	ft_sort_max(t_stack **stack_a, t_stack **stack_b)
-{
-	t_params	*params;
-	params = NULL;
-
-	while (*stack_b)
-	{
-		add_params_stack_b(*stack_a, *stack_b, &params);
-		push_and_rotate(stack_a, stack_b, it_s_min_cost(params));
-		ft_free_params(&params);
-	}
-}
-
-void	ft_sort_min(t_stack **stack_a, t_stack **stack_b)
-{
-	if (lst_size(*stack_a) == 3)
-	{
-		if ((*stack_a)->data > (*stack_a)->prev->data && (*stack_a)->data > (*stack_a)->next->data)
-		{
-			ft_ra(stack_a);
-			if ((*stack_a)->data > (*stack_a)->next->data)
-				ft_sa(stack_a);
-		}
-		else if ((*stack_a)->data > (*stack_a)->next->data)
-		{
-			ft_sa(stack_a);
-			if ((*stack_a)->prev->data < (*stack_a)->data)
-				ft_rra(stack_a);
-		}
-		else if ((*stack_a)->prev->data < (*stack_a)->data)
-		{
-			ft_rra(stack_a);
-			if ((*stack_a)->data > (*stack_a)->next->data)
-				ft_sa(stack_a);
-		}
-	}
 }
