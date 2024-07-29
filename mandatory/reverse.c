@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:30:57 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/23 17:40:26 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:05:43 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_ra(t_stack **stack_a)
 
 void	ft_rb(t_stack **stack_b)
 {
-	if (!stack_b && !(*stack_b))
+	if (stack_b && (*stack_b))
 	{
 		(*stack_b) = (*stack_b)->next;
 		ft_printf("rb\n");
@@ -48,9 +48,3 @@ void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 	if (i != 0)
 		ft_printf("rr\n");
 }
-
-void	ft_how_ra(t_stack **stack_a)
-{}
-
-void	ft_how_rb(t_stack **stack_b)
-{}

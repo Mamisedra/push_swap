@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:57:15 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/26 17:28:07 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:35:42 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 
 void print_params(t_params *params)
 {
-	static int i = 1;
 	if (params == NULL)
 	{
-		printf("PARAMS_NULL\n");
+		printf("Paramas = (NULL)\n");
 		return;
 	}
+	ft_printf("\t===========Paramètres===========\n\n");
     while (params != NULL)
     {
-        ft_printf("Paramètres %d:\n\n", i++);
-        ft_printf(" - Content: %d\n", params->content);
-        ft_printf(" - Pos_b: %d\n", params->pos_b);
-        ft_printf(" - Target: %d\n", params->target);
-        ft_printf(" - Cost_b: %d\n", params->cost_b);
-        ft_printf(" - Cost_a: %d\n", params->cost_a);
-        ft_printf(" - Cost_f: %d\n", params->cost_f);
+		ft_printf(" - Content: %d |", params->content);
+		ft_printf(" - Pos_b: %d |", params->pos_b);
+		ft_printf(" - Target: %d |", params->target);
+		ft_printf(" - Cost_b: %d |", params->cost_b);
+		ft_printf(" - Cost_a: %d |", params->cost_a);
+		ft_printf(" - Cost_f: %d |\n", params->cost_f);
         params = params->next;
     }
 }
@@ -37,18 +36,21 @@ void print_params(t_params *params)
 void	add_params_elem_stack(t_stack *stack_a, t_stack *stack_b, t_params **params)
 {
 	t_stack	*tmp;
+	int		i;
+	int		size;
 	int		pos;
 
 	if (stack_b == NULL)
 		return ;
 	tmp = stack_b;
 	pos = 1;
-	while (1)
+	i = 0;
+	size = lst_size(stack_b);
+	while (i != size)
 	{
 		ft_params_add_back(params, new_params(stack_a, tmp, pos));
 		tmp = tmp->next;
-		if (tmp == stack_b)
-			break ;
+		i++;
 		pos++;
 	}
 }
@@ -67,42 +69,4 @@ t_params	*ft_getcout_min(t_params *params)
 		params = params->next;
 	}
 	return (ret);
-}
-
-void	push_and_rotate(t_stack **stack_a, t_stack **stack_b, t_params *params)
-{
-	int	median_b;
-	int	size_a;
-	int	size_b;
-	int	median_a;
-
-	size_a = lst_size(*stack_a);
-	size_b = lst_size(*stack_b);
-	if (size_a % 2 != 0)
-		size_a += 1;
-	median_a = size_a / 2;
-	if (size_b % 2 != 0)
-		size_b += 1;
-	median_b = size_b / 2;
-	if (params->target <= median_a)
-	{
-		while((params->cost_a)--)
-			ft_ra(stack_a);
-	}
-	else
-	{
-		while((params->cost_a)--)
-			ft_rra(stack_a);
-	}
-	if (params->pos_b <= median_b)
-	{
-		while((params->cost_b)--)
-			ft_rb(stack_b);
-	}
-	else
-	{
-		while((params->cost_b)--)
-			ft_rrb(stack_b);
-	}
-	ft_pa(stack_a, stack_b);
 }

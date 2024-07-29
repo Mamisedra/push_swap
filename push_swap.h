@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:15:38 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/26 16:03:14 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:55:01 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,26 @@ int 	get_count(t_stack *stack, int size,int pos);
 
 /*=====================SHOW_TARGET=======================*/
 
-int		return_max(t_stack *stack_a);
-int		return_min(t_stack *stack_a);
-int		target_max(t_stack *stack_a, int l_max);
-int		target_min(t_stack *stack_a, int min);
-int		ft_show_target(t_stack *stack_a, int nb);
-
+int		return_min(t_stack *stack);
+int		return_max(t_stack *stack);
+int		get_number_place(t_stack *stack, int nb, int min);
+int		target_min_max(t_stack *stack, int min);
+int		get_target(t_stack *stack_a, int nb, int min, int max);
+int		get_cout(int size, int pos);
+void	ft_add_params_stack(t_stack *stack_a, t_stack *stack_b, t_params **params);
+void	ft_push_to_stack_a(t_stack **stack_a, t_stack **stack_b);
+void	return_stack_b_to_stack_a(t_stack **stack_a, t_stack **stack_b, int *tab);
+void	ft_remise_sort(t_stack **stack_a);
 /*====================LIST_PARAMS-C=====================*/
 
 t_params	*ft_paramslast(t_params *params);
 void		ft_params_add_back(t_params **params, t_params *new_p);
 void		ft_free_params(t_params **params);
 t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_b);
+void	copy_params_min(t_params	*params, int *tab);
+int	*ft_getparams_min(t_params *params);
 
+/*========================DELETe===========================*/
 
 void print_params(t_params *params);
 void printList(t_stack *stack);

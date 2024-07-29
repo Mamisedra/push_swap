@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:40:06 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/26 17:28:04 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:07:49 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 int lst_size(t_stack *stack)
 {
-    int len;
-    t_stack *current;
+	int len;
+	t_stack *current;
 
-    if (stack == NULL)
-        return 0;
-    current = stack;
-    len = 0;
-    while (current)
-    {
-        len++;
-        current = current->next;
-        if (current == stack) // Condition pour liste circulaire
-            break;
-        if (current == NULL) // Condition pour liste simplement chaînée
-            break;
-    }
-    return len;
+	if (stack == NULL)
+		return 0;
+	current = stack;
+	len = 0;
+	while (current)
+	{
+		len++;
+		current = current->next;
+		if (current == stack || current == NULL)
+			break;
+	}
+	return (len);
 }
 
 

@@ -6,7 +6,7 @@ FLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -rf
 SRCS	= mandatory/main.c mandatory/make_list.c mandatory/push_list.c mandatory/push_clear.c mandatory/push_swap.c \
 			mandatory/algorithm.c mandatory/push.c mandatory/swap.c mandatory/reverse_reverse.c mandatory/reverse.c \
-			mandatory/list_params.c mandatory/show_target.c mandatory/get_count.c 
+			mandatory/list_params.c mandatory/show_target.c
 
 OBJS	= $(SRCS:.c=.o)
 
