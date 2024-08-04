@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:28:20 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/24 17:49:23 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:51:38 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static long long	ft_atoi_long(char *str)
 
 	sign = 1;
 	i = 0;
-	while (str[i] != '\0' && (str[i] == ' ' || str[i] >= 9 && str[i] <=13))
+	while (str[i] != '\0' && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -39,6 +39,18 @@ static long long	ft_atoi_long(char *str)
 	return (result * sign);
 }
 
+int	ft_atoi_cheker(char **split, int j)
+{
+	if ((ft_atoi_long(split[j]) > 2147483647) || \
+	(ft_atoi_long(split[j]) < -2147483648))
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_free_split(split);
+		return (1);
+	}
+	return (0);
+}
+
 int	push_list(int argc, char *argv[], t_stack **stack_a)
 {
 	char	**split;
@@ -52,10 +64,10 @@ int	push_list(int argc, char *argv[], t_stack **stack_a)
 		if (ft_check_error_split(split))
 			return (ft_free_split(split), 0);
 		j = 0;
-		while (split[j]  != NULL)
+		while (split[j] != NULL)
 		{
-			if ((ft_atoi_long(split[j]) > 2147483647) || (ft_atoi_long(split[j]) < -2147483648))
-				return (ft_printf("%s %s\n", ERR_MSG, "Argument hors int"),ft_free_split(split), 0);
+			if (ft_atoi_cheker(split, j))
+				return (0);
 			lst_add_back(stack_a, new_list(ft_atoi(split[j])));
 			j++;
 		}
@@ -67,7 +79,7 @@ int	push_list(int argc, char *argv[], t_stack **stack_a)
 
 int	lst_double(t_stack *stack_a)
 {
-	t_stack *stop;
+	t_stack	*stop;
 	t_stack	*bot;
 	t_stack	*next_stack;
 
@@ -87,27 +99,11 @@ int	lst_double(t_stack *stack_a)
 	return (0);
 }
 
-int	lst_sort(t_stack *stack_a)
-{
-	t_stack *stop;
-	t_stack	*bot;
-
-	stop = stack_a->prev;
-	bot = stack_a;
-	while (bot != stop)
-	{
-		if (bot->data > bot->next->data)
-			return (0);
-		bot = bot->next;
-	}
-	return (1);
-}
-
 int	lst_all_error(t_stack *stack_a)
 {
 	if (lst_double(stack_a))
 	{
-		ft_printf("%s %s\n", ERR_MSG, "Arguments doubles");
+		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
 	if (lst_sort(stack_a))

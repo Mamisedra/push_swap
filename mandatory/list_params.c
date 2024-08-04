@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:31:31 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/28 14:38:14 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:33:43 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_params	*ft_paramslast(t_params *params)
 	return (params);
 }
 
-void ft_params_add_back(t_params **params, t_params *new_p)
+void	ft_params_add_back(t_params **params, t_params *new_p)
 {
 	t_params	*tmp;
 
@@ -40,20 +40,6 @@ void ft_params_add_back(t_params **params, t_params *new_p)
 			tmp->next = new_p;
 		}
 	}
-}
-
-void	ft_free_params(t_params **params)
-{
-	t_params	*tmp;
-
-	tmp = *params;
-	while (*params)
-	{
-		tmp = *params;
-		*params = (*params)->next;
-		free(tmp);
-	}
-	*params = NULL;
 }
 
 t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_b)
@@ -79,36 +65,4 @@ t_params	*new_params(t_stack *stack_a, t_stack *stack_b, int pos_b)
 	to_ret->cost_f = to_ret->cost_a + to_ret->cost_b + 1;
 	to_ret->next = NULL;
 	return (to_ret);
-}
-
-void	copy_params_min(t_params	*params, int *tab)
-{
-	tab[0] = params->content;
-	tab[1] = params->pos_b;
-	tab[2] = params->target;
-	tab[3] = params->cost_b;
-	tab[4] = params->cost_a;
-	tab[5] = params->cost_f;
-}
-
-int	*ft_getparams_min(t_params *params)
-{
-	int			*tab;
-	t_params	*params_min;
-	t_params	*begin;
-
-	tab = malloc(sizeof(int) * 6);
-	if (!tab)
-		return (NULL);
-	params_min = params;
-	begin = params;
-	while (params != NULL)
-	{
-		if (params->cost_f < params_min->cost_f)
-			params_min = params;
-		params = params->next;
-	}
-	params = begin;
-	copy_params_min(params_min, tab);
-	return (tab);
 }

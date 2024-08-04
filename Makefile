@@ -4,9 +4,10 @@ PRINTF_DIR	= ./ft_printf
 CC		= gcc
 FLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -rf
-SRCS	= mandatory/main.c mandatory/make_list.c mandatory/push_list.c mandatory/push_clear.c mandatory/push_swap.c \
-			mandatory/algorithm.c mandatory/push.c mandatory/swap.c mandatory/reverse_reverse.c mandatory/reverse.c \
-			mandatory/list_params.c mandatory/show_target.c
+SRCS	= mandatory/swap.c mandatory/show_target.c mandatory/show_cost.c mandatory/reverse.c mandatory/reverse_reverse.c \
+		mandatory/push.c mandatory/push_swap.c mandatory/push_swap_utils.c mandatory/push_list.c mandatory/push_clear.c \
+		mandatory/make_list.c mandatory/main.c mandatory/list_params.c mandatory/list_params_utils.c mandatory/algorithm.c \
+		mandatory/place_top.c mandatory/push_clear_utils.c mandatory/ft_lis.c mandatory/ft_lis_utils.c mandatory/all.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -23,7 +24,7 @@ libft:
 	@cp $(LIBFT_DIR)/libft.a ./
 
 $(NAME): extern $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) libftprintf.a libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(SRCS) libftprintf.a libft.a -o $(NAME)
 
 clean:
 	@make clean -C $(PRINTF_DIR)

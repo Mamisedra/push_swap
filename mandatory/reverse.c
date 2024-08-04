@@ -6,7 +6,7 @@
 /*   By: mranaivo <mranaivo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:30:57 by mranaivo          #+#    #+#             */
-/*   Updated: 2024/07/29 14:05:43 by mranaivo         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:17:15 by mranaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_ra(t_stack **stack_a)
 {
+	if (lst_size(*stack_a) == 1)
+		return ;
 	if (stack_a && (*stack_a))
 	{
 		(*stack_a) = (*stack_a)->next;
@@ -23,6 +25,8 @@ void	ft_ra(t_stack **stack_a)
 
 void	ft_rb(t_stack **stack_b)
 {
+	if (lst_size(*stack_b) == 1)
+		return ;
 	if (stack_b && (*stack_b))
 	{
 		(*stack_b) = (*stack_b)->next;
